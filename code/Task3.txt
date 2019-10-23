@@ -1,11 +1,11 @@
-preplexity(test_LM_e, test_dir, "e", False, 0) = 12.437363212896482
-preplexity(test_LM_f, test_dir, "f", False, 0) = 12.40620809030479
-preplexity(test_LM_e, test_dir, "e", True, 0.2) = 79.30721698615297
-preplexity(test_LM_f, test_dir, "f", True, 0.2) = 81.41615772923389
-preplexity(test_LM_e, test_dir, "e", True, 0.4) = 103.13217568081518
-preplexity(test_LM_f, test_dir, "f", True, 0.4) = 107.98483536821001
-preplexity(test_LM_e, test_dir, "e", True, 0.8) = 139.98101412884327
-preplexity(test_LM_f, test_dir, "f", True, 0.8) = 149.97491177103072
+preplexity(test_LM_e, test_dir, "e", False, 0) = 0
+preplexity(test_LM_f, test_dir, "f", False, 0) = 0
+preplexity(test_LM_e, test_dir, "e", True, 0.2) = 209.70349349072123
+preplexity(test_LM_f, test_dir, "f", True, 0.2) = 203.7774556629378
+preplexity(test_LM_e, test_dir, "e", True, 0.4) = 258.35702284809946
+preplexity(test_LM_f, test_dir, "f", True, 0.4) = 256.9116669885737
+preplexity(test_LM_e, test_dir, "e", True, 0.8) = 332.26326815985686
+preplexity(test_LM_f, test_dir, "f", True, 0.8) = 339.21251482354546
 
 We see as we increase the delta we also increase perpelxity
 French preplexity increases faster with an increasing delta even though the MLE for french is more accurate

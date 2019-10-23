@@ -70,4 +70,4 @@ def lm_train(data_dir, language, fn_LM):
     return LM
 
 if __name__ == "__main__":
-    lm_train("..\\data\\Hansard\\Training", "e", "e")
+    lm_train("..\\data\\Hansard\\Training", "f", "f")

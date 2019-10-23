@@ -42,15 +42,16 @@ def preplexity(LM, test_dir, language, smoothing = False, delta = 0):
 
 
 # test
-test_dir = r"C:\Users\Jerry\Documents\CSC401\A2_SMT\data\Hansard\Testing\\"
-train_dir = r"C:\Users\Jerry\Documents\CSC401\A2_SMT\data\Hansard\Training\\"
-test_LM_f = lm_train(train_dir, "f", "f_temp")
-test_LM_e = lm_train(train_dir, "e", "e_temp")
-print(preplexity(test_LM_e, test_dir, "e", False, 0))
-print(preplexity(test_LM_f, test_dir, "f", False, 0))
-print(preplexity(test_LM_e, test_dir, "e", True, 0.2))
-print(preplexity(test_LM_f, test_dir, "f", True, 0.2))
-print(preplexity(test_LM_e, test_dir, "e", True, 0.4))
-print(preplexity(test_LM_f, test_dir, "f", True, 0.4))
-print(preplexity(test_LM_e, test_dir, "e", True, 0.8))
-print(preplexity(test_LM_f, test_dir, "f", True, 0.8))
+if __name__ == '__main__':
+    test_dir = r"..\data\Hansard\Testing\\"
+    train_dir = r"..\data\Hansard\Training\\"
+    test_LM_f = lm_train(train_dir, "f", "f_temp")
+    test_LM_e = lm_train(train_dir, "e", "e_temp")
+    print(preplexity(test_LM_e, test_dir, "e", False, 0))
+    print(preplexity(test_LM_f, test_dir, "f", False, 0))
+    print(preplexity(test_LM_e, test_dir, "e", True, 0.2))
+    print(preplexity(test_LM_f, test_dir, "f", True, 0.2))
+    print(preplexity(test_LM_e, test_dir, "e", True, 0.4))
+    print(preplexity(test_LM_f, test_dir, "f", True, 0.4))
+    print(preplexity(test_LM_e, test_dir, "e", True, 0.8))
+    print(preplexity(test_LM_f, test_dir, "f", True, 0.8))

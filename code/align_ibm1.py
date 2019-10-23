@@ -133,6 +133,14 @@ def em_step(t, eng, fre):
     tcount = {}
     total = {}
 
+    for english_word in t:
+        if english_word != 'SENTSTART' and english_word != 'SENTEND':
+            tcount[english_word] = {}
+            total[english_word] = 0
+            for french_word in t[english_word]:
+                if french_word != 'SENTSTART' and french_word != 'SENTEND':
+                    tcount[english_word][french_word] = 0
+
     for sen in range(len(eng)):
         # change the sentences into unique lists
         unique_french = fre[sen]
@@ -157,10 +165,8 @@ def em_step(t, eng, fre):
                 denom_c = denom_c + t[english_word][french_word] * fre[sen].count(french_word)
 
             for english_word in unique_english:
-                tcount[english_word][french_word] += t[english_word][french_word] * unique_french.count(french_word) * unique_english.count(
-                    english_word) / denom_c
-                total[english_word] += t[english_word][french_word] * unique_french.count(french_word) * unique_english.count(
-                    english_word) / denom_c
+                tcount[english_word][french_word] += t[english_word][french_word] * unique_french.count(french_word) * unique_english.count(english_word) / denom_c
+                total[english_word] += t[english_word][french_word] * unique_french.count(french_word) * unique_english.count(english_word) / denom_c
 
     # update model
     for i in english_words:

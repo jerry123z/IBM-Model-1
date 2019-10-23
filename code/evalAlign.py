@@ -88,6 +88,7 @@ def _get_BLEU_scores(eng_decoded, eng, google_refs, n):
 
     return scores
 
+
 def main(args):
     """
     #TODO: Perform outlined tasks in assignment, like loading alignment
@@ -98,8 +99,8 @@ def main(args):
     It's entirely upto you how you want to write Task5.txt. This is just
     an (sparse) example.
     """
-    train_dir = r"C:\Users\Jerry\Documents\CSC401\A2_SMT\data\Hansard\Training\\"
-    LM = _getLM(train_dir, 'e', 'lm', use_cached=True)
+    train_dir = r"..\data\Hansard\Training\\"
+    LM = _getLM(train_dir, 'e', 'e', use_cached=True)
     print('1k')
     AM1k = _getAM(train_dir, 1000, 100, 'am1k', use_cached=True)
     print('10k')
@@ -111,9 +112,9 @@ def main(args):
     AM_list = [AM1k, AM10k, AM15k, AM30k]
     AM_names = ["1k", '10k', '15k', '30k']
 
-    french_file = r"C:\Users\Jerry\Documents\CSC401\A2_SMT\data\Hansard\task 5\Task5.f"
-    english_file = r"C:\Users\Jerry\Documents\CSC401\A2_SMT\data\Hansard\task 5\Task5.e"
-    google_file = r"C:\Users\Jerry\Documents\CSC401\A2_SMT\data\Hansard\task 5\Task5.google.e"
+    french_file = r"..\data\Hansard\task 5\Task5.f"
+    english_file = r"..\data\Hansard\task 5\Task5.e"
+    google_file = r"..\data\Hansard\task 5\Task5.google.e"
     with open(french_file, 'r') as file:
         lines = file.readlines()
         french_sentences = []
@@ -137,8 +138,7 @@ def main(args):
         for sent in range(0, 25):
             english_candidates[i].append(decode.decode(french_sentences[sent], LM, AM_list[i]))
 
-
-    f = open("Task5.txt", 'w+')
+    f = open("Task5.txt", 'w')
     f.write(discussion)
     f.write("\n\n")
     f.write("-" * 10 + "Evaluation START" + "-" * 10 + "\n")
@@ -158,7 +158,7 @@ def main(args):
     f.close()
     ## Write Results to Task5.txt (See e.g. Task5_eg.txt for ideation). ##
 
-    '''
+    """
     f = open("Task5.txt", 'w+')
     f.write(discussion) 
     f.write("\n\n")
@@ -181,9 +181,8 @@ def main(args):
 
     f.write("-" * 10 + "Evaluation END" + "-" * 10 + "\n")
     f.close()
-    '''
-    pass
-
+    return
+    """
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Use parser for debugging if needed")
