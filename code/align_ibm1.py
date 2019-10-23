@@ -37,7 +37,7 @@ def align_ibm1(train_dir, num_sentences, max_iter, fn_AM):
     for i in range(max_iter):
         em_step(AM, models[0], models[1])
 
-    # set SENTSTART and SENTEND thanks Piazza!
+    # set SENTSTART and SENTEND
     AM['SENTSTART'] = {}
     AM['SENTSTART']['SENTSTART'] = 1
     AM['SENTEND'] = {}
@@ -157,23 +157,13 @@ def em_step(t, eng, fre):
                 denom_c = denom_c + t[english_word][french_word] * fre[sen].count(french_word)
 
             for english_word in unique_english:
-                # If we havent encountered these yet, initialize struct appropriately
-                if french_word not in tcount:
-                    tcount[french_word] = {}
-                if english_word not in tcount[french_word]:
-                    tcount[french_word][english_word] = 0
-                if english_word not in total:
-                    total[english_word] = 0
-
-                # P(f|e) * F.count(f) * E.count(e) / denom_c
-                to_add = t[english_word][french_word] * fre[sen].count(french_word) * eng[sen].count(english_word) / denom_c
-                # tcount(f,e)
-                tcount[french_word][english_word] += to_add
-                # total(e)
-                total[english_word] += to_add
+                tcount[english_word][french_word] += t[english_word][french_word] * unique_french.count(french_word) * unique_english.count(
+                    english_word) / denom_c
+                total[english_word] += t[english_word][french_word] * unique_french.count(french_word) * unique_english.count(
+                    english_word) / denom_c
 
     # update model
     for i in english_words:
         french_words = t[i].keys()
         for j in french_words:
-            t[i][j] = tcount[j][i] / total[i]
+            t[i][j] = tcount[i][j] / total[i]

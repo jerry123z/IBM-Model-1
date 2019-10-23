@@ -38,35 +38,30 @@ def lm_train(data_dir, language, fn_LM):
                 lines = curr_file.readlines()
                 for line in lines:
                     processed_line = preprocess(line, language)
-                    words = processed_line.split(' ')
+                    sentence = processed_line.split(' ')
 
-                    # Start at index 1 to avoid SENTSTART and end at index -2 to avoid SENTEND for Unigram model
-                    for word in range(1, len(words)-1):
+                    if sentence[0] in LM["uni"]:
+                        LM["uni"][sentence[0]] += 1
+                    else:
+                        LM["uni"][sentence[0]] = 1
+
+                    # Start at index 1 to avoid SENTSTART for Bigram Model
+                    for word in range(1, len(sentence)):
                         # Unigrams
-                        if words[word] in LM["uni"]:
-                            LM["uni"][words[word]] += 1
+                        if sentence[word] in LM["uni"]:
+                            LM["uni"][sentence[word]] += 1
                         else:
-                            LM["uni"][words[word]] = 1
+                            LM["uni"][sentence[word]] = 1
 
                         # Bigrams
-                        if words[word-1] in LM["bi"]:
-                            if words[word] in LM["bi"][words[word-1]]:
-                                LM["bi"][words[word - 1]][words[word]] += 1
+                        if sentence[word-1] in LM["bi"]:
+                            if sentence[word] in LM["bi"][sentence[word-1]]:
+                                LM["bi"][sentence[word - 1]][sentence[word]] += 1
                             else:
-                                LM["bi"][words[word - 1]][words[word]] = 1
+                                LM["bi"][sentence[word - 1]][sentence[word]] = 1
                         else:
-                            LM["bi"][words[word-1]] = dict()
-                            LM["bi"][words[word - 1]][words[word]] = 1
-
-                    # Last word for bigrams, SENTEND
-                    if words[-2] in LM["bi"]:
-                        if words[-1] in LM["bi"][words[-2]]:
-                            LM["bi"][words[-2]][words[-1]] += 1
-                        else:
-                            LM["bi"][words[-2]][words[-1]] = 1
-                    else:
-                        LM["bi"][words[-2]] = dict()
-                        LM["bi"][words[-2]][words[-1]] = 1
+                            LM["bi"][sentence[word-1]] = dict()
+                            LM["bi"][sentence[word - 1]][sentence[word]] = 1
 
     #Save Model
     with open(fn_LM+'.pickle', 'wb') as handle:
@@ -75,4 +70,4 @@ def lm_train(data_dir, language, fn_LM):
     return LM
 
 if __name__ == "__main__":
-    lm_train("C:\\Users\\Jerry\\Documents\\CSC401\\A2_SMT\\data\\Hansard\\Training", "e", "e")
+    lm_train("..\\data\\Hansard\\Training", "e", "e")

@@ -1,5 +1,6 @@
 import re
 
+
 def preprocess(in_sentence, language):
     """
     This function preprocesses the input text according to language-specific rules.
@@ -16,21 +17,19 @@ def preprocess(in_sentence, language):
     """
     out_sentence = in_sentence
 
-    # Seperate sentence ending punctuation
+    # Separate sentence ending punctuation
     end_punctuation = r"""!"#$%&()*+,-./:;<=>?@[\]^_`{|}~"""
 
     punctuation_pattern = re.compile("([" + end_punctuation + "]+)$")
     out_sentence = re.sub(punctuation_pattern, " " + r'\1', out_sentence)
 
-    # Seperate all other punctuation
+    # Separate all other punctuation
     other_punctuation = r""",:;()+-<>"="""
 
     punctuation_pattern = re.compile("([" + other_punctuation + r"])")
     out_sentence = re.sub(punctuation_pattern, " " + r'\1' + " ", out_sentence)
 
-
-
-    if (language == 'f'):
+    if language == 'f':
         # also contains the l' pattern
         single_consonant_pattern = r"\b([a-zA-Z]')([a-zA-Z])"
         out_sentence = re.sub(single_consonant_pattern, r'\1' + " " + r'\2', out_sentence)
@@ -47,7 +46,6 @@ def preprocess(in_sentence, language):
         out_sentence = re.sub(puisque_pattern, r'\1' + " " + r'\2', out_sentence)
         lorsque_pattern = r"(lorsqu')([a-zA-Z])"
         out_sentence = re.sub(lorsque_pattern, r'\1' + " " + r'\2', out_sentence)
-
 
     # Add sentstart and sentend
     out_sentence = "SENTSTART " + out_sentence + " SENTEND"
